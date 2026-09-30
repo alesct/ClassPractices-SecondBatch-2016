@@ -29,7 +29,7 @@
 
 ### 2.2 실시간 도구 활용 AI 에이전트 
 
-![AI 에이전트 파이프라인](images/chatbot.png)
+![AI 에이전트 파이프라인](images/cb.png)
 
 * **When chat message received**: 사용자 채팅 메시지 수신 트리거
 * **AI Agent**: 추론, 메모리 관리, 도구 호출을 총괄하는 중앙 오케스트레이터
