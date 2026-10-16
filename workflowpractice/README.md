@@ -65,5 +65,5 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
 
 ## 5. 결과
 PDF를 Drive에 업로드하면 임베딩이 Supabase에 저장되고, 챗에서 질문하면 문서 내용을 근거로 답변이 생성되어 Gmail로 발송됩니다.
-![message](images/recieved.png)
+![message](images/received.png)
 
