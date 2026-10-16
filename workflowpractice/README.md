@@ -32,7 +32,7 @@ Google Drive에 문서를 올리면 Supabase 벡터 DB에 저장하고, 채팅�
 4. **Edit Fields**: `output` 필드에 `{{ $json.output }}` 저장
 5. **Gmail Send a message**: 본문에 `{{ $json.output }}` 사용
 
-## 3. 사용 기술
+## 3. 설치 및 설정
 - n8n (Docker)
   ![Docker](images/dockerlogin.png)
 Windows 명령 프롬프트에서는 **한 줄**로 실행합니다.
