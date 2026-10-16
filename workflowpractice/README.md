@@ -43,7 +43,7 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
   
 - Supabase
   ![superbase](images/supabasecheck.png)
-1. 프로젝트 생성 후 SQL Editor에서 [Schema.SQL](Schema.SQL) 실행
+1. 프로젝트 생성 후 SQL Editor에서 [Schema.SQL](SchemaSQL.txt) 실행
 2. Project URL과 service_role 키 확인
   
 - Google Gemini (임베딩, 채팅 모델)
@@ -65,5 +65,5 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
 
 ## 5. 결과
 PDF를 Drive에 업로드하면 임베딩이 Supabase에 저장되고, 챗에서 질문하면 문서 내용을 근거로 답변이 생성되어 Gmail로 발송됩니다.
-![message](images/received.png)
+![message](images/received.jpg)
 
