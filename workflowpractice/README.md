@@ -14,7 +14,7 @@ Google Drive에 문서를 올리면 Supabase 벡터 DB에 저장하고, 채팅�
 
 ## 2. 워크플로 구성
 
-![workflowpractice](images workflow/workflow.png)
+![workflowpractice](images/workflow.png)
 
 ###  문서 수집
 1. **Google Drive Trigger**: File Created, 지정 폴더 감시
@@ -33,7 +33,7 @@ Google Drive에 문서를 올리면 Supabase 벡터 DB에 저장하고, 채팅�
 
 ## 3. 사용 기술
 - n8n (Docker)
-  ![Docker](images workflow/dockerlogin.png)
+  ![Docker](images/dockerlogin.png)
 Windows 명령 프롬프트에서는 **한 줄**로 실행합니다.
 ```
 docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data:/home/node/.n8n docker.n8n.io/n8nio/n8n
@@ -41,8 +41,8 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
 브라우저에서 http://localhost:5678 접속 후 계정을 생성합니다.
   
 - Supabase
-  ![superbase](images workflow/superbasecheck.png)
-1. 프로젝트 생성 후 SQL Editor에서 [`schema.sql`](Schema.SQL) 실행
+  ![superbase](images/superbasecheck.png)
+1. 프로젝트 생성 후 SQL Editor에서 [`Schema.SQL`](Schema.SQL) 실행
 2. Project URL과 service_role 키 확인
   
 - Google Gemini (임베딩, 채팅 모델)
@@ -56,16 +56,13 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
 | Google Gemini | Host: `https://generativelanguage.googleapis.com`, API Key: AI Studio에서 발급 |
 | Google Drive / Gmail | Google Cloud에서 Drive API, Gmail API 사용 설정 후 OAuth 클라이언트 생성, 리디렉션 URI: `http://localhost:5678/rest/oauth2-credential/callback`, 테스트 사용자에 본인 이메일 추가 |
 
-### 4-1. 워크플로 가져오기
-n8n에서 **Import from File**로 `workflows/` 폴더의 JSON을 불러온 뒤, 각 노드의 자격 증명을 다시 선택합니다. (자격 증명은 JSON에 포함되지 않습니다.)
-
-### 4-2. 테스트
+### 4-1. 테스트
 1. Drive 폴더에 PDF 업로드 → Supabase `documents` 테이블에 행이 생겼는지 확인
 2. 채팅창에서 문서 내용 관련 질문 입력
 3. Gmail 수신함에서 답변 메일 확인
-![message](images workflow/questionsuccess.png)
+![message](images/questionsuccess.png)
 
 ## 5. 결과
 PDF를 Drive에 업로드하면 임베딩이 Supabase에 저장되고, 챗에서 질문하면 문서 내용을 근거로 답변이 생성되어 Gmail로 발송됩니다.
-![message](images workflow/recieved.png)
+![message](images/recieved.png)
 
