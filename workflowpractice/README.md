@@ -14,7 +14,7 @@ Google Drive에 문서를 올리면 Supabase 벡터 DB에 저장하고, 채팅�
 
 ## 2. 워크플로 구성
 
-![workflow](images workflow/workflow.png)
+![workflowpractice](images workflow/workflow.png)
 
 ###  문서 수집
 1. **Google Drive Trigger**: File Created, 지정 폴더 감시
@@ -42,7 +42,7 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
   
 - Supabase
   ![superbase](images workflow/superbasecheck.png)
-1. 프로젝트 생성 후 SQL Editor에서 [`schema.sql`](schema.sql) 실행
+1. 프로젝트 생성 후 SQL Editor에서 [`schema.sql`](Schema.SQL) 실행
 2. Project URL과 service_role 키 확인
   
 - Google Gemini (임베딩, 채팅 모델)
