@@ -43,7 +43,7 @@ docker run -d --name n8n-ae --restart unless-stopped -p 5678:5678 -v n8n_ae_data
   
 - Supabase
   ![superbase](images/supabasecheck.png)
-1. 프로젝트 생성 후 SQL Editor에서 [Schema.SQL](SchemaSQL.txt) 실행
+1. 프로젝트 생성 후 SQL Editor에서 [Schema.SQL](SchemaSQL) 실행
 2. Project URL과 service_role 키 확인
   
 - Google Gemini (임베딩, 채팅 모델)
