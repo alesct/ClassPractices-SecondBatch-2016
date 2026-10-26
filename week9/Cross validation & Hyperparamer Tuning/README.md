@@ -33,16 +33,6 @@ KNN, Logistic Regression, Naive Bayes, Decision Tree, Random Forest, XGBoost
 
 ![Tuned 5-Fold 성능](images/fold_5.png)
 
-| Model | FN+FP | FPR | Recall | Precision | F1-Score | PR_AUC | AUROC |
-|---|---|---|---|---|---|---|---|
-| KNN (Tuned) | 30.6 | 0.1129 | 0.7338 | 0.8021 | 0.7662 | 0.8413 | 0.8751 |
-| Logistic Regression (Tuned) | 29.6 | 0.1166 | 0.7542 | 0.8015 | 0.7767 | 0.8549 | 0.8731 |
-| Naive Bayes (Tuned) | 38.6 | 0.1585 | 0.6898 | 0.7309 | 0.7087 | 0.7654 | 0.8376 |
-| Decision Tree (Tuned) | 30.4 | 0.1221 | 0.7512 | 0.7935 | 0.7710 | 0.8102 | 0.8629 |
-| Random Forest (Tuned) | 28.0 | 0.0984 | 0.7485 | 0.8273 | 0.7853 | 0.8560 | 0.8787 |
-| **XGBoost (Tuned)** | **26.8** | **0.0965** | **0.7631** | **0.8317** | **0.7957** | **0.8619** | **0.8812** |
-
-**XGBoost가 7개 지표 모두에서 가장 좋았어요.** Naive Bayes가 가장 낮았어요. (FN+FP, FPR은 작을수록, 나머지는 클수록 좋아요.)
 
 ### 튜닝 전(Baseline) vs 튜닝 후(Tuned): F1
 
