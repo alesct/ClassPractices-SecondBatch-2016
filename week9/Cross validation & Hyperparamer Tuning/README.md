@@ -4,9 +4,6 @@
 
 > 교수님이 주신 `term_project_optuna.py`를 Google Colab에서 실행하고, 단계별 설명을 덧붙인 노트북이에요.
 
-## 바로 실행하기
-
-
 ## 사용한 모델 6개
 
 KNN, Logistic Regression, Naive Bayes, Decision Tree, Random Forest, XGBoost
