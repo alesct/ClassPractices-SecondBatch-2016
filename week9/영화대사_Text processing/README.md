@@ -2,9 +2,10 @@
 스타워즈 대사 기반 선(Good) / 악(Bad) 캐릭터 이진 분류 및 ML 모델 성능 평   
 분석 데이터: 100 lines vs 1000 lines
 
-**1\. 데이터규모 및 정제 요약** 
-![](images/first.png)
-![](images/wordcount.png)
+**1\. 데이터규모 및 정제 요약**
+
+## ![](images/first.png)
+## ![](images/wordcount.png)
 
 **2\. 데이터 증량 및 평가 지표 핵심 검증** 
 
@@ -26,7 +27,10 @@ Accuracy와 Bad 클래스 Recall이 서로 다른 결론을 보여준 사례가 
 상승하여 오분류 위험을 대폭 낮췄습니다. 이는 극단적 불균형 코퍼스에서 Accuracy가 단독 지표로 서 심각한 기만성을 가짐을 증명합니다.
 
 **3\. 벡터화 기법 및 머신러닝 알고리즘 평가** 
-![](images/weightbalance.png)
+
+## ![](images/weightbalance.png)
+
+
 CountVectorizer와 TF-IDF 중 어느 쪽이 더 좋았으며, 데이터 특성으로 설명 가능한가? 결과: TF-IDF가 CountVectorizer 대비 Macro F1 기준 평균 4.2%p 우수한 성능을 기록.   
 영화 대사 코퍼스는 문장이 짧고 "I", "you", "the", "force" 등 모든 캐릭터가 공통으로 빈번하게 사용하는 단어(Stopwords) 비율이 높습니다. 
 단순 단어 출현 횟수를 세는 \`CountVectorizer\`는 이러한 고빈도 일반 단어에 과도한 가중치를 부여하여 노이즈를 유발합니다. 
