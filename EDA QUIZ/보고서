@@ -1,0 +1,23 @@
+Python for Data Analysis 13장 Quiz 보고서
+1. 개요
+Wes McKinney의 Python for Data Analysis 13장 예제 5개(Bitly, MovieLens, 미국 신생아 이름, USDA 식품, FEC 후원금)를 학습하고, 각 Quiz를 pandas로 풀었다. 데이터는 저자의 GitHub(3rd-edition 브랜치의 datasets)에서 코드로 직접 내려받으므로 노트북(quiz_with_answers.ipynb)은 처음부터 끝까지 실행된다. 추가로 5개 Quiz를 한 화면에서 조작해 볼 수 있는 Gradio 앱(app.py)을 구현했다.
+2. Quiz별 풀이와 결과
+Quiz 1. Bitly 1.USA.gov
+풀이: a가 결측인 행을 제거하고, tz의 결측은 "Missing", 빈 문자열은 "Unknown"으로 바꾼 뒤 np.where로 os 열(Windows / Not Windows)을 만들었다. 접속 상위 10개 시간대를 value_counts().nlargest(10)으로 고르고 groupby(["tz","os"]).size()로 건수를 센 다음, transform("sum")으로 시간대별 비율을 계산했다.
+결과: Windows 비율 상위 5곳은 Pacific/Honolulu(100%), Asia/Tokyo(94.6%), America/New_York(72.9%), America/Chicago(71.3%), America/Los_Angeles(66.0%)이다. Honolulu와 Tokyo는 접속이 36건, 37건뿐이라 비율이 극단적이며, 접속이 가장 많은 New_York(1,251건)은 약 73%이다.
+Quiz 2. MovieLens 1M
+풀이: users, ratings, movies를 merge로 합치고 평점 250개 이상인 영화만 남겼다. pivot_table로 영화별 성별 평균을 구해 diff = M − F를 만들고, str.split("|")와 explode로 장르별 행으로 펼친 뒤 abs().groupby(genre).idxmax()로 장르마다 차이가 가장 큰 영화를 골랐다.
+결과: 여성이 더 높게 평가한 차이가 가장 큰 영화는 Dirty Dancing(−0.83, Romance·Musical), 남성이 더 높게 평가한 영화는 The Good, The Bad and The Ugly(+0.73, Action·Western)이다. 여러 장르에 속한 영화는 장르마다 중복해서 나타난다.
+Quiz 3. US Baby Names 1880–2010
+풀이: decade = year // 10 * 10을 만들고 이름·10년대·성별 출생수를 집계해 unstack으로 여아 비율(F/(F+M))을 구했다. 1900년대와 2000년대 모두 출생수 500명 이상, 1900년대 여아 비율 20% 미만, 2000년대 80% 초과를 동시에 만족하는 이름을 찾았다.
+결과: 남자 이름에서 여자 이름으로 바뀐 이름은 Aubrey(10.5% → 95.1%)와 Leslie(11.3% → 97.0%) 두 개이다.
+Quiz 4. USDA Food Database
+풀이: 중첩 JSON을 info와 nutrients로 정규화해 id로 병합(ndata)하고 단백질 행만 추출했다. 식품군별 중위수를 transform("median")으로 모든 행에 붙여 ratio = value / fg_median을 계산하고, 중위수가 0보다 크면서 ratio가 2 이상인 식품만 남긴 뒤 agg로 개수와 최대 ratio, idxmax로 최대 식품을 구했다.
+결과: 개수는 Vegetables and Vegetable Products(139개), Beverages(106개), Legumes and Legume Products(101개) 순이다. 최대 ratio는 Beverages가 358.6배(Cocoa mix, 25.1g)로 가장 큰데, 음료의 단백질 중위수가 약 0.07g으로 거의 0이기 때문이며 Fats and Oils가 124.6배로 그다음이다.
+Quiz 5. 2012 FEC 후원금
+풀이: 환불(금액 ≤ 0)을 제외하고 Obama·Romney 후원만 남긴 뒤, "INFORMATION REQUESTED…" 3종은 "NOT PROVIDED", "C.E.O."는 "CEO"로 통일했다. 후보별·주별 합계를 구해 총액 10만 달러 초과 주만 남기고 주별 비율을 계산했으며, 주마다 후원금이 가장 큰 직업을 top_occupation으로 붙였다.
+결과: Obama 비율이 가장 높은 주는 VT(94.7%), ME(90.9%), PR(88.1%), HI(87.7%), MN(85.6%)이다. 이 지역의 최다 후원 직업은 PR(PRESIDENT)을 제외하면 모두 RETIRED(은퇴자)이다.
+3. Gradio 앱
+app.py는 탭 5개(Quiz 1~5)로 구성되며, 탭마다 Quiz의 기준값을 슬라이더로 바꿀 수 있다(상위 시간대 개수, 최소 평점 수 250, 최소 출생수 500과 여아 비율 20%·80%, 최소 ratio 2, 주별 최소 후원액 10만 달러). 실행 버튼을 누르면 결과 표와 그래프가 함께 갱신된다. 데이터는 처음 실행할 때만 내려받아 data 폴더에 저장하고, 이후에는 메모리에 캐시해 빠르게 응답한다. 실행은 pip install gradio pyarrow 후 python app.py이며, 브라우저에서 http://127.0.0.1:7860으로 접속한다.
+4. 결론
+transform은 그룹 통계를 모든 행에 붙여 비율을 계산할 때(Quiz 1, 4), unstack은 긴 표를 넓은 표로 바꿀 때(Quiz 3, 5), explode는 리스트가 든 열을 행으로 펼칠 때(Quiz 2) 핵심이었다. 또한 건수가 적은 그룹(Honolulu, Tokyo)이나 중위수가 거의 0인 그룹(Beverages)은 비율이 과장될 수 있으므로, 비율은 표본 크기와 함께 해석해야 한다는 점을 확인했다.
